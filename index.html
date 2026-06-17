@@ -7,7 +7,7 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
   <style>
-    @import url('https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,200..1000;1,200..1000&display=swap');
+    @import url('https://fonts.googleapis.com/css2?family=Source+Sans+3:ital,wght@0,200..900;1,200..900&display=swap');
 
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
@@ -55,7 +55,7 @@
     .envelope svg { width: 100%; height: 100%; }
 
     .envelope-hint {
-      font-family: 'Nunito', serif;
+      font-family: 'Source Sans 3', serif;
       font-style: italic;
       color: #080203;
       font-size: 1rem;
@@ -86,7 +86,7 @@
       align-items: center;
       gap: 1.2rem;
       width: 100%;
-      max-width: 620px;
+      max-width: 900px; /* Agrandado para que entren el A4 y las flechas laterales */
     }
 
     /* Flechas laterales */
@@ -113,18 +113,21 @@
       fill: none; stroke-linecap: round; stroke-linejoin: round;
     }
 
-    /* La carta en sí */
+    /* La carta en sí (Formato A4) */
     #carta-display {
       background: #fffaf9;
       border: 1px solid #f3cdd2;
       border-radius: 4px;
-      padding: 2.6rem 3rem;
-      max-width: 520px;
+      padding: 3.5rem 4rem; 
       width: 100%;
+      max-width: 794px; 
+      aspect-ratio: 1 / 1.414; 
       box-shadow: 0 2px 8px #e8919822, 0 16px 48px #e8919818;
       position: relative;
-      min-height: 340px;
+      display: flex; /* Añadido para controlar el centro */
+      flex-direction: column;
     }
+    
     #carta-display::before {
       content: '';
       display: block;
@@ -133,14 +136,26 @@
       background: #e8919880;
       border-radius: 2px;
       margin: 0 auto 2rem;
+      flex-shrink: 0;
     }
 
     /* Páginas de la carta */
     .carta-pagina {
       display: none;
       animation: fadeIn 0.4s ease;
+      flex-grow: 1; /* Permite que la página ocupe todo el alto disponible */
     }
-    .carta-pagina.activa { display: block; }
+    
+    .carta-pagina.activa { 
+      display: flex; 
+      flex-direction: column; 
+    }
+
+    /* Regla exclusiva para centrar el contenido de la Página 2 */
+    #pagina-2 {
+      justify-content: center; /* Centra verticalmente */
+      align-items: center;     /* Centra horizontalmente */
+    }
 
     @keyframes fadeIn {
       from { opacity: 0; transform: translateY(8px); }
@@ -158,7 +173,7 @@
       margin-bottom: 1.6rem;
     }
     .carta-saludo {
-      font-family: 'Nunito', serif;
+      font-family: 'Source Sans 3', serif;
       font-size: 1.35rem;
       color: #000000;
       margin-bottom: 1.2rem;
@@ -172,7 +187,7 @@
       margin-bottom: 1.4rem;
     }
     .carta-firma {
-      font-family: 'Nunito', serif;
+      font-family: 'Source Sans 3', serif;
       font-style: italic;
       font-size: 1.1rem;
       color: #000000;
@@ -271,28 +286,41 @@
 
         <!-- Página 1 -->
         <div class="carta-pagina activa" id="pagina-1">
-          <p class="carta-fecha">Junio, 2026</p>
-          <p class="carta-saludo">Querida amiga,</p>
+          <p class="carta-saludo">Hola Mi Amor, Dos Puntos.</p>
+          
           <p class="carta-cuerpo">
-            Hay cosas que a veces cuesta decir en voz alta, pero que merecen ser escritas con cuidado y con calma. Quiero que sepas que pienso en vos, que valoro cada momento compartido y que tu presencia hace que los días sean más livianos y más luminosos.
+            Te escribo esta carta para, además de decirte feliz cumpleaños, contarte un poco más, porque como sabes literalmente nunca me callo.
           </p>
+          
           <p class="carta-cuerpo">
-            Gracias por escuchar sin juzgar, por reír en los momentos exactos y por estar cerca incluso en la distancia. Estas palabras son pequeñas para todo lo que quiero expresar, pero las mando con el corazón lleno.
+            Quería que supieras que en estos 3 meses y medio que estuvimos juntos, aprendí muchísimas cosas sobre cómo manejar una relación, tuve mis equivocaciones, y vos me acompañaste a poder mejorar para ser el novio que yo quiero ser para vos. Y sobretodo, que siempre estés para mi incluso cuando yo o vos estamos muy ocupados significa un montón, de hecho, que ahora mismo estés para mí incluso cuando estás haciendo tu trabajo para la facultad para mí es algo muy preciado.
+          </p>
+          
+          <p class="carta-cuerpo">
+            Últimamente pienso muchísimo en vos, pienso en tu sonrisa, en tus abrazos, tus besos, tu voz, en lo hermosa que sos, y un montón de cosas más sobre vos que me hicieron pensar en por qué para mí es tan especial este día, y es que realmente, te lo digo en serio, sos la persona que más amo en el mundo. Sos la persona con la que quiero estar siempre, siempre quiero levantarme y hablar con vos, ver una serie o peli, buscar cosas para hacer juntos, caminar juntos, tener muchísimas citas, y básicamente compartir todo lo que soy y lo que quiero con vos. Este día es muy especial para mí porque es el día que vos viniste al mundo y, por ende, gracias a eso viniste a mi vida también, suena muy cursi pero estoy muy agradecido.
+          </p>
+          
+          <p class="carta-cuerpo">
+            Agradecido por siempre hablar con vos, porque siempre queres hacer algo juntos, por hacerme reír tanto, por compartir conmigo las cosas que te pasan (tu felicidad, tristeza, dudas). Básicamente, estoy agradecido por quién sos Sofi, sos la persona que más amo porque sos la persona con quien más me siento conectado, siento que me entendés, y que tenés genuino interés en apoyarme en todo lo que quiero hacer, por eso cómo no voy a estar agradecido por este día, y cómo no voy a querer celebrarlo contento.
+          </p>
+
+          <p class="carta-cuerpo">
+            Sé que para vos este día no significa tanto, y sé que capaz todo esto te parece un poco exagerado, pero es algo que llevo pensando hacer desde hace tiempo, porque es lo que quiero darte por ser lo que sos, por haberme dejado entrar en tu vida, y sobretodo, por siempre elegirme a mí.
+          </p>
+
+          <p class="carta-cuerpo">
+            Muchas gracias Sofi, feliz cumpleaños y espero que la pases re bien con tus amigos el viernes, estoy muy muy muy orgulloso de vos y de todo lo que podés conseguir, sé que sos la chica más capaz del mundo y espero que sea un año hermoso tanto para vos, como para nosotros.<br>
+            Te amo
+          </p>
+
+          <p class="carta-firma">
+            Con todo mi amor, Agustin
           </p>
         </div>
 
         <!-- Página 2 -->
         <div class="carta-pagina" id="pagina-2">
-          <p class="carta-cuerpo">
-            Cada vez que pienso en los momentos que compartimos, me doy cuenta de lo afortunada que soy de tenerte cerca. Las risas, las charlas largas, los silencios cómodos — todo eso forma parte de algo muy valioso que atesoro.
-          </p>
-          <p class="carta-cuerpo">
-            Espero que cada día te traiga algo lindo, aunque sea pequeño. Y que sepas que, en la distancia o en la cercanía, siempre hay alguien pensando en vos con mucho afecto.
-          </p>
-          <p class="carta-cuerpo">
-            Que esta carta te llegue como un abrazo. Siempre.
-          </p>
-          <p class="carta-firma">Con mucho cariño ✿</p>
+          <img src="foto.jpg" alt="monchichi cumple" style="width: 100%; max-width: 500px; border-radius: 4px; box-shadow: 0 4px 16px rgba(0,0,0,0.15);">
         </div>
 
       </div>
